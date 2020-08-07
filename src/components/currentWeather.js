@@ -16,7 +16,7 @@ function CurrentWeather(props) {
     return(
         <div className="current-component">
             <div className="current left">
-                <p> <i class="fa fa-location-arrow" style={{fontSize:"30px", color:"red" }}></i> (latitude, longitude): ({weather.lat}, {weather.lon}) </p>
+                <p> <i className="fa fa-location-arrow" style={{fontSize:"30px", color:"red" }}></i> (latitude, longitude): ({weather.lat}, {weather.lon}) </p>
                 <p> 
                     <img id="weather-icon" src={"http://openweathermap.org/img/w/" + weather.weather.icon + ".png"}  alt="weather-icon" />
                     <span> <span id="temperature">{weather.current.temp}</span> degree </span>

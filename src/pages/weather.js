@@ -14,7 +14,7 @@ function Weather() {
 
 
     async function getCurrentPositionWeather(lat, long) {
-        let data = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)        
+        let data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)        
         let res = await data.json();
         setcurrentWeather({
             ...currentWeather, lat: res.lat, lon: res.lon, current: res.current, weather: res.current.weather[0]
@@ -33,7 +33,6 @@ function Weather() {
             navigator.geolocation.getCurrentPosition(function(position) {
                 let lat = position.coords.latitude;
                 let long = position.coords.longitude;
-                console.log(lat, '  ', long);
                 getCurrentPositionWeather(lat,long);
             });
         }
@@ -50,7 +49,6 @@ function Weather() {
             let time=new Date();
             time.setHours(currentTime.getHours() + i);
             data.push([time, dataset[i].temp, dataset[i].pop * 100]);
-            console.log(time)
         }
         chart = <Chart
             width={"100%"}
@@ -86,7 +84,7 @@ function Weather() {
         let date = new Date();
         for (let i = 0; i < dataset.length; i++) {
                 let dayForecast = (
-                    <ReactHover options={optionsCursorTrueWithMargin} style={{backgroundColor:"red"}}>
+                    <ReactHover options={optionsCursorTrueWithMargin}>
                         <Trigger type='trigger'>
                             <div className="react-trigger">
                                 <p>{JSON.stringify(date).substring(1, 11)}</p>
