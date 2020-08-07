@@ -1,0 +1,16 @@
+.current-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgb(147, 241, 253);
+    text-align: center;
+    border-radius: 20px;
+}
+
+.current-component .left, .middle{
+    margin-right: 40px;
+}
+#temperature {
+    font-size: 48px;
+}

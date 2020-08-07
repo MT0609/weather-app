@@ -1,0 +1,26 @@
+#weather-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    background-color: rgb(255, 247, 231);
+}
+
+.hourly-daily{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+} 
+#hourly-chart{
+    width: 50%;
+    background-color: springgreen;
+}
+#forecast{
+    width: 50%;
+}
+.react-trigger {
+    display: flex;
+    background-color: palegreen;
+    margin-bottom: 10px;
+    justify-content: space-around;
+}
