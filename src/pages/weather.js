@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Chart } from "react-google-charts";
 import CurrentWeather from '../components/currentWeather';
 import DayForecast from '../components/dailyForecast';
+import NotLocated from '../components/notLocated'
 import ReactHover, { Trigger, Hover } from 'react-hover'
 import './weather.css'
 
@@ -9,9 +10,9 @@ function Weather() {
     const [currentWeather, setcurrentWeather] = useState({ 
         lat: "", lon: "", current: {}, weather: {}
     });
-    const [hourly, setHourly] = useState([])
-    const [daily, setDaily] = useState([])
-
+    const [hourly, setHourly] = useState([]);
+    const [daily, setDaily] = useState([]);
+    const [isLocated, setLocated] = useState(false);
 
     async function getCurrentPositionWeather(lat, long) {
         let data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)        
@@ -19,6 +20,7 @@ function Weather() {
         setcurrentWeather({
             ...currentWeather, lat: res.lat, lon: res.lon, current: res.current, weather: res.current.weather[0]
         });
+        setLocated(true);
 
         let {hourly} = res;
         setHourly(hourly);
@@ -87,9 +89,9 @@ function Weather() {
                     <ReactHover options={optionsCursorTrueWithMargin}>
                         <Trigger type='trigger'>
                             <div className="react-trigger">
-                                <p>{JSON.stringify(date).substring(1, 11)}</p>
+                                <span>{JSON.stringify(date).substring(1, 11)}</span>
                                 <img id="weather-icon" src={"http://openweathermap.org/img/w/" + dataset[i].weather[0].icon + ".png"}  alt="weatherForecast-icon" />
-                                <p> {dataset[i].weather[0].description} </p>
+                                <span> {dataset[i].weather[0].description} </span>
                             </div>
                         </Trigger>
                         <Hover type='hover'>
@@ -105,22 +107,29 @@ function Weather() {
     }
 
     return(
-        <div id="weather-page">
-            <h1>Weather forecast</h1>
-            <div className="current">
-                <CurrentWeather weather={currentWeather} />
-            </div>
-            <hr></hr>
+        <div>
+            {isLocated ?
+                <div id="weather-page">
+                    <h1>Weather forecast</h1>
+                    <div className="current">
+                        <CurrentWeather weather={currentWeather} />
+                    </div>
+                    <hr></hr>
 
-            <div className="hourly-daily">
-                <div id="hourly-chart">
-                    { hourlyChart(hourly) }
-                </div>
-                <div id="forecast">
-                    { renderForecast(daily) }
-                </div>
-            </div>
-        </div>  
+                    <div className="hourly-daily">
+                        <div id="hourly-chart" className="hourly-daily-box">
+                            { hourlyChart(hourly) }
+                        </div>
+                        <div id="forecast" className="hourly-daily-box">
+                            { renderForecast(daily) }
+                        </div>
+                    </div>
+                </div> : 
+                <div>
+                    <NotLocated />
+                </div> 
+            } 
+        </div>
     )
 }
 

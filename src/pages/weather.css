@@ -8,19 +8,39 @@
 .hourly-daily{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    width: 80%;
+    justify-content: space-around;
+    width: 100%;
 } 
+
 #hourly-chart{
-    width: 50%;
+    width: calc(60% - 10px);
     background-color: springgreen;
 }
 #forecast{
-    width: 50%;
+    width: 40%;
 }
 .react-trigger {
-    display: flex;
+    display: grid;
     background-color: palegreen;
     margin-bottom: 10px;
-    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    grid-template-columns: 30% 40% 30%;
+}
+.react-trigger img{
+    margin: auto;
+}
+
+@media screen and (max-width: 700px) {
+    .hourly-daily {
+        display: flex;
+        flex-direction: column;
+    }
+    #hourly-chart{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    #forecast{
+        width: 100%;
+    }
 }

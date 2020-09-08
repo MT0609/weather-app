@@ -1,0 +1,18 @@
+#not-locate{
+    background-image: linear-gradient(125deg,#6a89cc,#b8e994);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#not-locate .weather-icon {
+    width: 100px;
+}
+
+#not-locate .alert {
+    font-weight: 500;
+    letter-spacing: 10px;
+    font-size: 30px;
+}
